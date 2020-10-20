@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+h1,h2{
+  margin:auto;
+  text-align: center;
+}
+

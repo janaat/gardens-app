@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <div>JANIN RASADNIK</div>
+  <form class="button-div">
+      <div *ngIf="!userIsAuthenticated" ><button mat-button (click)="login()" color="accent">Login</button></div>
+      <div *ngIf="!userIsAuthenticated" ><button mat-button (click)="register()" color="accent">Register</button></div>
+      <div *ngIf="userIsFarmer" ><button mat-button (click)="gardens()" color="accent">Gardens</button></div>
+      <div *ngIf="userIsFarmer" ><button mat-button (click)="shop()" color="accent">Shop</button></div>
+      <div *ngIf="!userIsAuthenticated" ><button mat-button (click)="change()" color="accent">Change password</button></div>
+      <div *ngIf="userIsAuthenticated" ><button mat-button (click)="logout()" color="accent">Logout</button></div>
+    </form>
+</mat-toolbar>

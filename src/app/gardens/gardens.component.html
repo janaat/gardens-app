@@ -1,0 +1,148 @@
+<hr />
+<h1>{{ name }} garden</h1>
+<hr />
+<mat-tab-group>
+  <mat-tab label="Take care of your garden">
+    <table>
+      <div>
+        <td>
+          Increase temperature:
+        </td>
+        <td>
+          <button mat-raised-button color="primary" (click)="addTemperature()">
+            +1 degree
+          </button>
+        </td>
+        <td>Fill 1l of water:</td>
+        <td>
+          <button mat-raised-button color="primary" (click)="addWater()">
+            +1 liter
+          </button>
+        </td>
+      </div>
+    </table>
+  </mat-tab>
+  <mat-tab label="Garden">
+    <h1>You can see your garden here:</h1>
+    <hr />
+    <div>
+      <mat-grid-list cols=3 rowHeight="1:1" class="css-grid">
+        <mat-grid-tile
+          matTooltip="Some text"
+          (mouseover)="mouseEnter(p)"
+          (mouseleave)="mouseLeave(p)"
+          *ngFor="let p of current.products"
+        >
+          <br />
+          <button
+            mat-raised-button
+            (click)="takeOut()"
+            [hidden]="p.progress !== 100"
+          >
+            TAKE
+          </button>
+          <button
+            mat-raised-button
+            (click)="fertilize(p)"
+            [hidden]="p.progress === 100"
+          >
+            FERT
+          </button>
+          <button mat-raised-button (click)="putIn()" [hidden]="p !== null">
+            PUT
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div>
+      <table *ngIf="visible">
+        <h1>Information:</h1>
+        <div>Plant name: {{ temp.name }}</div>
+        <br />
+        <div>Manufacturer: {{ temp.manufacturer }}</div>
+        <br />
+        <div>Progress: {{ temp.progress }}%</div>
+        <br />
+        <div>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="temp.progress"
+          ></mat-progress-bar>
+        </div>
+        <br />
+      </table>
+    </div>
+    <div>
+      <table>
+        <h1>Fertilizators list:</h1>
+        <tr>
+          <th>Name:</th>
+          <th>Manufacturer:</th>
+        </tr>
+        <tr *ngFor="let f of storage.products" [hidden]="f.type === 'plant'">
+          <td>{{ f.name }}</td>
+          <td>{{ f.manufacturer }}</td>
+          <td><button mat-raised-button (click)="use(temp)">USE</button></td>
+        </tr>
+
+      </table>
+    </div>
+    <div>
+      <table>
+        <h1>Plants list:</h1>
+        <tr>
+          <th>Name:</th>
+          <th>Manufacturer:</th>
+        </tr>
+        <tr
+          *ngFor="let p of storage.products"
+          [hidden]="p.type === 'fertilizer'"
+        >
+          <td>{{ p.name }}</td>
+          <td>{{ p.manufacturer }}</td>
+          <td><button mat-raised-button (click)="plant(p)">PLANT</button></td>
+        </tr>
+      </table>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Storage">
+    <hr />
+    <h1>Storage</h1>
+    <hr />
+    <table
+      mat-table
+      [dataSource]="storage.products"
+      matSort
+      class="mat-elevation-z8"
+      (matSortChange)="sortData($event)"
+    >
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name.</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="manufacturer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Manufacturer</th>
+        <td mat-cell *matCellDef="let element">{{ element.manufacturer }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <hr />
+    <button mat-raised-button (click)="addbasic()">ADD BASIC</button>
+
+  </mat-tab>
+
+</mat-tab-group>

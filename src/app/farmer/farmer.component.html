@@ -1,0 +1,163 @@
+<hr>
+<h1>Gardens</h1>
+ <!-- <table mat-table [dataSource]='dataSource' matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="place">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
+    <td mat-cell *matCellDef="let element"> {{element.place}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="used">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Used </th>
+    <td mat-cell *matCellDef="let element"> {{element.used}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="full">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Free </th>
+    <td mat-cell *matCellDef="let element"> {{element.free}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="water">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Water </th>
+    <td mat-cell *matCellDef="let element"> {{element.water}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="temperature">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Temperature </th>
+    <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef='displayedColumns'></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table> -->
+<hr>
+<table cellspacing="5">
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Place
+    </th>
+    <th>
+      Used
+    </th>
+    <th>
+      Free
+    </th>
+    <th>
+      H20
+    </th>
+    <th>
+      Temperature
+    </th>
+  </tr>
+  <tr *ngFor="let r of gardens" [hidden]="r.username !== username">
+    <td>
+      {{ r.name }}
+    </td>
+    <td>
+      {{ r.place }}
+    </td>
+    <td>
+      {{ r.used }}
+    </td>
+    <td>
+      {{ r.free }}
+    </td>
+    <td>
+      {{ r.water }} l
+    </td>
+    <td>
+      {{ r.temperature.toFixed(2) }} °C
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="enter(r)">
+        More
+      </button>
+    </td>
+  </tr>
+</table>
+<hr>
+<div class="reg-div">
+  <mat-card class="registration-class">
+    <mat-card-header>
+      <h2>Add new garden</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="registration-form" #registerForm="ngForm">
+        <table class="tegistration-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input
+                  matInput
+                  placeholder="Name"
+                  [(ngModel)]="name"
+                  name="name"
+                  required
+                />
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input
+                  matInput
+                  placeholder="Insert Y"
+                  [(ngModel)]="y"
+                  name="y"
+                  required
+                />
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input
+                  matInput
+                  placeholder="Insert X"
+                  [(ngModel)]="x"
+                  name="x"
+                  required
+                />
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input
+                  matInput
+                  placeholder="Place of your garden"
+                  [(ngModel)]="place"
+                  name="place"
+                  #placeInput="ngModel"
+                  required
+                />
+              </mat-form-field>
+            </td>
+          </tr>
+          <button
+            mat-raised-button
+            style="display:inline-block; align-items: center;"
+            (click)="addGarden(registerForm)"
+            color="primary"
+          >
+            ADD
+          </button>
+        </table>
+        <mat-card-actions>
+
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
