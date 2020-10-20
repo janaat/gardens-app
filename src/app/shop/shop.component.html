@@ -1,0 +1,285 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+  rel="stylesheet"
+/><hr />
+<h1>WELCOME TO ONLINE SHOP</h1>
+
+<hr>
+<mat-tab-group>
+  <mat-tab label="My orders">
+    <h1>My orders</h1>
+<hr>
+<table cellspacing="5">
+  <tr>
+    <th>
+      Username
+    </th>
+    <th>
+      Status
+    </th>
+    <th>
+      Date
+    </th>
+    <th>
+      Order accepted?
+    </th>
+  </tr>
+  <tr *ngFor="let o of orders" [hidden]="o.user!==this.current">
+    <td>
+      {{ o.user }}
+    </td>
+    <td>
+      {{ o.status }}
+    </td>
+    <td>
+      {{ o.date.toString().slice(0,10)}}
+    </td>
+    <td>
+      {{ o.isDelivered}}
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="cancel(o)" [hidden]="o.isDelivered">
+        <!-- probala [hidden]="o.status!=='Pending'" -->
+        Cancel
+      </button>
+    </td>
+  </tr>
+</table>
+<hr />
+  </mat-tab>
+  <mat-tab label="All products">
+    <h1>ALL PRODUCTS</h1>
+<hr>
+<div class="search-hero">
+  <input
+    class="form-control"
+    type="text"
+    name="search"
+    [(ngModel)]="searchText"
+    autocomplete="off"
+    placeholder=" Search by name"
+  />
+</div>
+<table cellspacing="5">
+  <tr>
+    <th>
+      Type
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Manufacturer
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      Available
+    </th>
+    <th>
+      Rating
+    </th>
+  </tr>
+  <tr *ngFor="let r of products | productFilter:searchText">
+    <td>
+      {{ r.type }}
+    </td>
+    <td>
+      {{ r.name }}
+    </td>
+    <td>
+      {{ r.manufacturer }}
+    </td>
+    <td>
+      {{ r.quantity }}
+    </td>
+    <td>
+      {{ r.available }}
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="details(r)">
+        ...
+      </button>
+    </td>
+    <td>
+      <button mat-raised-button color="accent" (click)="add(r)">
+        Add
+      </button>
+    </td>
+  </tr>
+</table>
+<hr />
+<h1>Shopping list</h1>
+Content of your shopping list is: {{ shoppingList }}
+
+<hr />
+<form (submit)="buy(forma)" #forma="ngForm">
+<!-- <h4>Choose the garden:</h4>
+<mat-form-field>
+  <mat-label>Gardens...</mat-label>
+  <mat-select [(value)]="garden">
+    <mat-option *ngFor="let g of gardens" name="garden" [hidden]="g.username!==name" >
+      {{g.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<p>You selected: {{garden}}</p> -->
+<hr>
+<button mat-raised-button color="primary" type="submit" >
+  <!-- */(click)="buy(forma)"/* -->
+  BUY
+</button>
+</form>
+
+  </mat-tab>
+  <mat-tab label="About shop">
+  <h3>You expected something here. :-)</h3>
+  </mat-tab>
+</mat-tab-group>
+<!-- <h1>My orders</h1>
+<hr>
+<table cellspacing="4">
+  <tr>
+    <th>
+      Username
+    </th>
+    <th>
+      Status
+    </th>
+  </tr>
+  <tr *ngFor="let o of orders" [hidden]="o.user!==this.current">
+    <td>
+      {{ o.user }}
+    </td>
+    <td>
+      {{ o.status }}
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="cancel(o)">
+        Cancel
+      </button>
+    </td>
+  </tr>
+</table>
+<hr />
+
+<br /> -->
+
+
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="search-hero">
+      <input
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        autocomplete="off"
+        placeholder="&#61442;  Start searching for a hero by id or name or country"
+      />
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Manufacturer</th>
+          <th>Quantity</th>
+          <th>Available</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of products | filter:searchText">
+          <td>{{ r.type }}</td>
+          <td>{{ r.name }}</td>
+          <td>{{ r.manufacturer }}</td>
+          <td>{{ r.quantity }}</td>
+          <td>{{ r.available }}</td>
+          <td>
+            <button mat-raised-button color="primary" (click)="details(r)">
+              ...
+            </button>
+          </td>
+          <td>
+            <button mat-raised-button color="accent" (click)="add(r.name)">
+              Add
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<!-- <h1>ALL PRODUCTS</h1>
+<hr>
+<div class="search-hero">
+  <input
+    class="form-control"
+    type="text"
+    name="search"
+    [(ngModel)]="searchText"
+    autocomplete="off"
+    placeholder=" Search..."
+  />
+</div>
+<table cellspacing="5">
+  <tr>
+    <th>
+      Type
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Manufacturer
+    </th>
+    <th>
+      Quantity
+    </th>
+    <th>
+      Available
+    </th>
+    <th>
+      Rating
+    </th>
+  </tr>
+  <tr *ngFor="let r of products">
+    <td>
+      {{ r.type }}
+    </td>
+    <td>
+      {{ r.name }}
+    </td>
+    <td>
+      {{ r.manufacturer }}
+    </td>
+    <td>
+      {{ r.quantity }}
+    </td>
+    <td>
+      {{ r.available }}
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="details(r)">
+        ...
+      </button>
+    </td>
+    <td>
+      <button mat-raised-button color="accent" (click)="add(r)">
+        Add
+      </button>
+    </td>
+  </tr>
+</table>
+<hr />
+<h1>Shopping list</h1>
+Content of your shopping list is: {{ shoppingList }}
+
+<hr />
+<button mat-raised-button color="primary" (click)="buy()">
+  BUY
+</button> -->

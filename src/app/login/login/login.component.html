@@ -1,0 +1,65 @@
+<!-- <p>login works!</p><br><br>
+<input type="text"  name="username" placeholder="Username"><br>
+<input type="password" name="password" placeholder="Password"><br>
+Admin <input type="radio" name="type"><br>
+Poljoprivrednik <input type="radio" name="type"><br>
+Preduzece <input type="radio" name="type"><br>
+<input type="button" (click)="login()" value="LOGIN"> -->
+
+<div class="main-div">
+
+  <mat-card class="login-class">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="login-form" (submit)="login(loginForm)" #loginForm="ngForm">
+          <table class="login-full-width" cellspacing="0">
+
+                <mat-form-field class="login-full-width">
+                <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+                </mat-form-field>
+              <br>
+
+              <mat-form-field class="login-full-width">
+              <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+            </mat-form-field>
+          <tr>
+              <td>
+                  <mat-form-field>
+                  <mat-select name="type" [(ngModel)]="type" required placeholder="Type">
+                      <mat-option value="admin">
+                          Admin
+                      </mat-option>
+                      <mat-option value="farmer">
+                          Farmer
+                      </mat-option>
+                      <mat-option value="company">
+                          Company
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              </td>
+          </tr>
+          <tr>
+            <td>
+              <a routerLink="/changepass">Forgot password?</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="color: red;">
+              {{message}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <button mat-raised-button type="submit" color="primary">Login</button>
+            </td>
+          </tr>
+          </table>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+
+    </mat-card>
