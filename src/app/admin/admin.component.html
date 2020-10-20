@@ -1,0 +1,238 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+  rel="stylesheet"
+/>
+<h1>USERS PENDING</h1>
+<table cellspacing="5">
+  <tr>
+    <th>
+      Username
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Surname
+    </th>
+    <th>
+      Email
+    </th>
+    <th>
+      Place
+    </th>
+  </tr>
+  <tr *ngFor="let r of users" [hidden]="r.approved == true">
+    <td>
+      {{ r.username }}
+    </td>
+    <td>
+      {{ r.name }}
+    </td>
+    <td>
+      {{ r.surname }}
+    </td>
+    <td>
+      {{ r.email }}
+    </td>
+    <td>
+      {{ r.place }}
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="approve(r)">
+        Approve
+      </button>
+    </td>
+    <td>
+      <button mat-raised-button color="accent" (click)="reject(r.username)">
+        Reject
+      </button>
+    </td>
+  </tr>
+</table>
+<hr />
+<h1>ALL USERS:</h1>
+<table cellspacing="5">
+  <tr>
+    <th>
+      Username
+    </th>
+    <th>
+      Name
+    </th>
+    <th>
+      Surname
+    </th>
+    <th>
+      Email
+    </th>
+    <th>
+      Place
+    </th>
+    <th>
+      Type
+    </th>
+  </tr>
+  <tr *ngFor="let r of users" [hidden]="r.approved == false">
+    <td>
+      {{ r.username }}
+    </td>
+    <td>
+      {{ r.name }}
+    </td>
+    <td>
+      {{ r.surname }}
+    </td>
+    <td>
+      {{ r.email }}
+    </td>
+    <td>
+      {{ r.place }}
+    </td>
+    <td>
+      {{r.type}}
+    </td>
+    <td>
+      <button mat-raised-button color="primary" (click)="update(r)">
+        Update
+      </button>
+    </td>
+    <td>
+      <button mat-raised-button color="accent" (click)="reject(r.username)">
+        Delete
+      </button>
+    </td>
+
+  </tr>
+</table>
+<div class="reg-div">
+
+  <mat-card class="registration-class">
+    <mat-card-header>
+    Add new user manually
+    </mat-card-header>
+    <mat-card-content>
+      <form class="registration-form" #registerForm="ngForm">
+        <table class="tegistration-full-width" cellspacing=0>
+          <tr>
+            <td>
+                <mat-form-field>
+                <mat-select name="type" [(ngModel)]="type" required placeholder="Type">
+                    <mat-option value="admin">
+                        Admin
+                    </mat-option>
+                    <mat-option value="farmer">
+                        Farmer
+                    </mat-option>
+                    <mat-option value="company">
+                        Company
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </td>
+        </tr>
+          <tr *ngIf="type==='farmer'">
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input matInput placeholder="Name" [(ngModel)]="name" name="name" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr *ngIf="type==='company'">
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input matInput placeholder="Full name of your company" [(ngModel)]="name" name="name" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr *ngIf="type==='farmer'">
+            <td>
+              <mat-form-field class="registration-full-width">
+                <input matInput placeholder="Surname" [(ngModel)]="surname" name="surname" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+              <td>
+                <mat-form-field class="registration-full-width">
+                  <input matInput placeholder="E-mail" [(ngModel)]="email" name="email" required>
+                </mat-form-field>
+              </td>
+            </tr>
+              <tr>
+                  <td>
+                    <mat-form-field class="registration-full-width">
+                      <input matInput placeholder="Username" [(ngModel)]="username" name="username"  required>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                    <td>
+                      <mat-form-field class="registration-full-width">
+                        <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" #passwordInput="ngModel" required pattern="^(?=.{7,20}$)(?!.*(\S)\1{2})(?=.*[A-Z])(?=.*[a-z]{3})(?=.*\d)(?=.*[^a-zA-Z0-9])([a-zA-Z]\S*)$">
+                        <mat-error *ngIf="passwordInput.invalid">Password not valid</mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td>
+                        <mat-form-field class="registration-full-width">
+                          <input matInput type="password" placeholder="Confirm password" [(ngModel)]="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" required pattern="^(?=.{7,20}$)(?!.*(\S)\1{2})(?=.*[A-Z])(?=.*[a-z]{3})(?=.*\d)(?=.*[^a-zA-Z0-9])([a-zA-Z]\S*)$">
+                          <mat-error *ngIf="confirmPasswordInput.invalid">Confirm password doesn't match</mat-error>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                    <tr *ngIf="type==='farmer'">
+                        <td>
+                          <mat-form-field class="registration-full-width">
+                            <input matInput placeholder="Contact phone" [(ngModel)]="phone" name="phone" #phoneInput="ngModel" required >
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr *ngIf="type==='farmer'">
+                        <td>
+                          <mat-form-field class="registration-full-width">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" [ngModel]="date" name="date" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr *ngIf="type==='company'">
+                        <td>
+                          <mat-form-field class="registration-full-width">
+                          <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" [ngModel]="date" name="date" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+
+                      <tr *ngIf="type==='farmer'">
+                        <td>
+                          <mat-form-field class="registration-full-width">
+                            <input matInput placeholder="Place of birth" [(ngModel)]="place" name="place" #placeInput="ngModel" required>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr *ngIf="type==='company'">
+                        <td>
+                          <mat-form-field class="registration-full-width">
+                            <input matInput placeholder="Place of your company" [(ngModel)]="place" name="place" #placeInput="ngModel" required>
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <mat-card-actions>
+                        <button mat-raised-button (click)="register(registerForm)" color="primary">Register</button>
+                      </mat-card-actions>
+
+
+
+        </table>
+            </form>
+
+    </mat-card-content>
+
+
+  </mat-card>

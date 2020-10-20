@@ -1,0 +1,46 @@
+<div class="main-div">
+  <mat-card class="changepassword-class">
+      <mat-card-header>
+          <mat-card-title>
+              Change password
+          </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form class="changepassword-form" #changeForm="ngForm">
+              <table class="changepassword-full-width" cellspacing="0">
+                  <tr>
+                      <td>
+                          <mat-form-field class="changepassword-full-width">
+                              <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+                          </mat-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <mat-form-field class="changepassword-full-width">
+                              <input matInput type="password" placeholder="Old password" [(ngModel)]="oldpassword" name="oldpassword" required>
+                          </mat-form-field>
+                      </td>
+                  </tr>
+                  <tr>
+                        <td>
+                            <mat-form-field class="changepassword-full-width">
+                                <input matInput type="password" placeholder="New password" [(ngModel)]="newpassword" name="newpassword" required pattern="^(?=.{8,12}$)(?!.*(\S)\1{2})(?=.*[A-Z])(?=.*[a-z]{3})(?=.*\d)(?=.*[^a-zA-Z0-9])([a-zA-Z]\S*)$">
+                            </mat-form-field>
+                        </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <mat-form-field class="changepassword-full-width">
+                              <input matInput type="password" placeholder="Confirm new password" [(ngModel)]="confirmNewpassword" name="confirmNewpassword" required pattern="^(?=.{8,12}$)(?!.*(\S)\1{2})(?=.*[A-Z])(?=.*[a-z]{3})(?=.*\d)(?=.*[^a-zA-Z0-9])([a-zA-Z]\S*)$">
+                          </mat-form-field>
+                      </td>
+                </tr>
+              </table>
+          </form>
+      </mat-card-content>
+      <mat-card-actions>
+              <button mat-raised-button (click)="change(changeForm)" color="primary">Change</button>
+      </mat-card-actions>
+  </mat-card>
+  </div>

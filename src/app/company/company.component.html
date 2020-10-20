@@ -1,0 +1,210 @@
+<h1>Welcome {{current}}</h1>
+<hr>
+<mat-tab-group>
+  <mat-tab label="Orders">
+    <h1>Orders</h1>
+<hr>
+<table cellspacing="5" matSort (matSortChange)="sortData($event)">
+  <tr>
+    <th mat-sort-header="user">
+      Username
+    </th>
+    <th mat-sort-header="status">
+      Status
+    </th>
+    <th mat-sort-header="date">
+      Date
+    </th>
+    <th>
+      Deliver
+    </th>
+    <th>
+      Reject
+    </th>
+     <!-- <th>Product list</th> -->
+  </tr>
+  <tr *ngFor="let o of sortedData" >
+    <td>
+      {{ o.user }}
+    </td>
+    <td>
+      {{ o.status }}
+    </td>
+    <td >
+      {{ o.date.toString().slice(0,10) }}
+    </td>
+    <td>
+      <button mat-raised-button color="primary"  (click)="deliver(o)" [hidden]="o.status.toString()!=='Pending'">
+        Deliver
+      </button>
+    </td>
+    <td>
+      <button mat-raised-button color="accent" (click)="reject(o)" [hidden]="o.status.toString()!=='Pending'">
+        Reject/Delete
+      </button>
+    </td>
+<!--     <td *ngFor="let p of o.products" [hidden]="p.manufacturer!==this.current">
+      {{p.name }},
+    </td> -->
+
+  </tr>
+</table>
+  <h2>Available bus boys: {{busBoy}}</h2>
+  </mat-tab>
+  <mat-tab label="Add new product">
+    <h1>Add new product</h1>
+    <hr>
+    <div class="reg-div">
+      <mat-card class="registration-class">
+        <!-- <mat-card-header>
+          Add new product
+        </mat-card-header> -->
+        <mat-card-content>
+          <form class="registration-form" #registerForm="ngForm">
+            <table class="tegistration-full-width" cellspacing="0">
+              <tr>
+                <td>
+                  <mat-form-field class="registration-full-width">
+                    <input
+                      matInput
+                      placeholder="Name"
+                      [(ngModel)]="name"
+                      name="name"
+                      required
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="registration-full-width">
+                    <input
+                      matInput
+                      placeholder="Quantity"
+                      [(ngModel)]="quantity"
+                      name="quantity"
+                      required
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field class="registration-full-width">
+                    <input
+                      matInput
+                      placeholder="Dynamics"
+                      [(ngModel)]="dynamics"
+                      name="dynamics"
+                      required
+                    />
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-select name="type" [(ngModel)]="type" required placeholder="Type">
+                        <mat-option value="plant">
+                            Plant
+                        </mat-option>
+                        <mat-option value="fertilizer">
+                            Fertilizer
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                </td>
+              </tr>
+            </table>
+            <mat-card-actions>
+              <button
+                mat-raised-button
+                (click)="addProduct(registerForm)"
+                color="primary"
+              >
+                Add product
+              </button>
+            </mat-card-actions>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <br>
+
+  </mat-tab>
+  <mat-tab label="All products">
+    <hr>
+    <h1>ALL PRODUCTS</h1>
+    <hr>
+    <table cellspacing="5">
+      <tr>
+        <th>
+          Type
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          Manufacturer
+        </th>
+        <th>
+          Quantity
+        </th>
+        <th>
+          Available
+        </th>
+        <th>
+          Rating
+        </th>
+      </tr>
+      <tr *ngFor="let r of products" [hidden]="r.manufacturer!==this.current">
+        <td>
+          {{ r.type }}
+        </td>
+        <td>
+          {{ r.name }}
+        </td>
+        <td>
+          {{ r.manufacturer }}
+        </td>
+        <td>
+          {{ r.quantity }}
+        </td>
+        <td>
+          {{ r.available }}
+        </td>
+        <td>
+          <button mat-raised-button color="primary" (click)="details(r)">
+            ...
+          </button>
+        </td>
+        <td>
+          <button mat-raised-button color="primary" (click)="removeProduct(r)">
+            REMOVE
+          </button>
+        </td>
+      </tr>
+    </table>
+    <hr />
+
+  </mat-tab>
+
+<hr />
+<mat-tab label="Monthly review">
+  <hr>
+  <h1>Monthly review</h1>
+  <hr>
+  <button mat-raised-button (click)='refresh()'>REFRESH</button>
+  <table>
+    <td>
+      <tr style="color: blue;">Date</tr>
+      <tr style="color: blue">Number of orders</tr>
+    </td>
+    <td *ngFor="let broj of counter;let ind=index">
+      <tr>{{brojac[ind]}}</tr>
+      <tr>{{broj}}</tr>
+    </td>
+  </table>
+  <!-- <app-barchart *ngIf="chartData" [data]="chartData"></app-barchart> -->
+</mat-tab>
+</mat-tab-group>

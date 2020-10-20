@@ -1,0 +1,29 @@
+
+.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #405065;
+}
+h1{
+  margin:auto;
+  text-align: center;
+}
+.search-hero {
+  margin:30px;
+}
+
+/* .form-control {
+  box-shadow: 0 10px 40px 0 #B0C1D9;
+} */
+.form-control::placeholder  {
+  font-family: Arial, Helvetica, sans-serif;
+}
+table{
+  margin: 40px;
+}
+td{
+  text-align: center;
+}
+.css-pending{
+  background-color: yellow;
+}

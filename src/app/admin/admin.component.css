@@ -1,0 +1,53 @@
+h2{
+  margin-top: 50px;
+  color: indigo;
+}
+
+button{
+  margin: 10px;
+}
+
+mat-radio-button{
+  margin-left: 140px;
+}
+
+.left-div{
+position: relative;
+}
+
+.right-div{
+  position: relative;
+  left: 700px;
+  top: -250px;
+}
+
+.flex-div{
+  display: flex;
+}
+
+div{
+  margin: 20px;
+}
+
+td{
+  width: 33%;
+}
+.reg-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightblue;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
